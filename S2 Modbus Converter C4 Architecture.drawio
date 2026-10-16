@@ -1,0 +1,211 @@
+<mxfile host="65bd71144e">
+    <diagram name="C4 Context + Component View" id="d8wX0fByQjon72x27ZKB">
+        <mxGraphModel dx="2835" dy="2228" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1500" pageHeight="1050" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <object c4Description="Configures WiFi, HEMS/S2 and appliance JSON via the captive portal." c4Name="Configurator" c4Technology="" c4Type="Person" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" placeholders="1" id="ctx_config">
+                    <mxCell style="html=1;fontSize=11;dashed=0;whiteSpace=wrap;fillColor=#dae8fc;strokeColor=#6c8ebf;shape=mxgraph.c4.person2;align=center;metaEdit=1;resizable=1;" parent="1" vertex="1">
+                        <mxGeometry x="810" y="-60" width="220" height="150" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object c4Description="S2 CEM/HEMS that pairs with the converter and sends PEBC requests." c4Name="Customer Energy Manager (S2)" c4Technology="" c4Type="External Software System" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" placeholders="1" id="ctx_cem">
+                    <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#8C8496;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#736782;metaEdit=1;resizable=1;" parent="1" vertex="1">
+                        <mxGeometry x="-110" y="400" width="250" height="120" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object c4Description="Controllable appliance exposed through Modbus TCP or RTU." c4Name="Modbus device under control" c4Technology="" c4Type="External Hardware System" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" placeholders="1" id="ctx_device">
+                    <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#8C8496;fontColor=#ffffff;align=center;arcSize=10;strokeColor=#736782;metaEdit=1;resizable=1;" parent="1" vertex="1">
+                        <mxGeometry x="1610" y="610" width="250" height="120" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object c4Application="Software System on ESP32" c4Name="S2 Modbus Converter" c4Type="SystemScopeBoundary" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;&lt;div style=&quot;text-align: left&quot;&gt;%c4Name%&lt;/div&gt;&lt;/b&gt;&lt;/font&gt;&lt;div style=&quot;text-align: left&quot;&gt;[%c4Application%]&lt;/div&gt;" placeholders="1" id="ctx_boundary">
+                    <mxCell style="rounded=1;fontSize=11;whiteSpace=wrap;html=1;dashed=1;arcSize=20;fillColor=none;strokeColor=#666666;fontColor=#333333;labelBackgroundColor=none;align=left;verticalAlign=bottom;spacing=10;dashPattern=8 4;connectable=0;recursiveResize=0;" parent="1" vertex="1">
+                        <mxGeometry x="250" y="180" width="1250" height="590" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object c4Description="Initializes APSTA networking, optional Ethernet and route/interface selection." c4Name="Ethernet/WiFi Component" c4Technology="ESP-IDF netif/WiFi/Ethernet" c4Type="Component" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" placeholders="1" id="c_net">
+                    <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#63BEF2;fontColor=#ffffff;align=center;arcSize=6;strokeColor=#2086C9;metaEdit=1;resizable=1;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" parent="1" vertex="1">
+                        <mxGeometry x="390" y="220" width="220" height="100" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object c4Description="Provides local /config and /appliance pages over the AP." c4Name="Captive Portal Component" c4Technology="DNS + esp_http_server" c4Type="Component" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" placeholders="1" id="c_captive">
+                    <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#63BEF2;fontColor=#ffffff;align=center;arcSize=6;strokeColor=#2086C9;metaEdit=1;resizable=1;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" parent="1" vertex="1">
+                        <mxGeometry x="810" y="220" width="220" height="100" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object c4Description="Stores WiFi/HEMS settings, AP password, S2 token and device template JSON." c4Name="Storage Component" c4Technology="NVS + SPIFFS" c4Type="Component" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" placeholders="1" id="c_storage">
+                    <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#63BEF2;fontColor=#ffffff;align=center;arcSize=6;strokeColor=#2086C9;metaEdit=1;resizable=1;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" parent="1" vertex="1">
+                        <mxGeometry x="390" y="610" width="220" height="100" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object c4Description="Builds S2 RM config, pairs with CEM and translates S2 callbacks." c4Name="S2 Wrapper" c4Technology="S2 client library" c4Type="Wrapper" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" placeholders="1" id="c_s2wrap">
+                    <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#3AAE8E;fontColor=#ffffff;align=center;arcSize=6;strokeColor=#1F7B63;metaEdit=1;resizable=1;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" parent="1" vertex="1">
+                        <mxGeometry x="390" y="405" width="220" height="100" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object c4Description="Protocol-neutral bridge between S2 wrapper and device mapping." c4Name="EMS Bridge" c4Technology="FreeRTOS queues + callbacks" c4Type="Bridge" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" placeholders="1" id="c_ems">
+                    <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#2F95D8;fontColor=#ffffff;align=center;arcSize=6;strokeColor=#1D6FA8;metaEdit=1;resizable=1;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" parent="1" vertex="1">
+                        <mxGeometry x="810" y="405" width="220" height="100" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object c4Description="Maps EMS sensor/actuator IDs to configured Modbus register actions." c4Name="Modbus Mapping Component" c4Technology="FreeRTOS task" c4Type="Component" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" placeholders="1" id="c_map">
+                    <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#63BEF2;fontColor=#ffffff;align=center;arcSize=6;strokeColor=#2086C9;metaEdit=1;resizable=1;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" parent="1" vertex="1">
+                        <mxGeometry x="1200" y="405" width="220" height="100" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object c4Description="Displays boot, network, ready, warning and fatal states." c4Name="LED Component" c4Technology="GPIO / NeoPixel" c4Type="Component" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" placeholders="1" id="c_led">
+                    <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#63BEF2;fontColor=#ffffff;align=center;arcSize=6;strokeColor=#2086C9;metaEdit=1;resizable=1;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" parent="1" vertex="1">
+                        <mxGeometry x="1200" y="220" width="220" height="100" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object c4Description="Configures device" c4Technology="Captive portal UI" c4Type="Relationship" label="&lt;div style=&quot;text-align: center&quot;&gt;&lt;b&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center&quot;&gt;[%c4Technology%]&lt;/div&gt;" placeholders="1" id="e_config_portal">
+                    <mxCell style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="ctx_config" target="c_captive" edge="1">
+                        <mxGeometry x="-0.3846" width="240" relative="1" as="geometry">
+                            <mxPoint as="offset"/>
+                        </mxGeometry>
+                    </mxCell>
+                </object>
+                <object c4Description="Reads/writes config" c4Technology="NVS/SPIFFS" c4Type="Relationship" label="&lt;div style=&quot;text-align: center&quot;&gt;&lt;b&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center&quot;&gt;[%c4Technology%]&lt;/div&gt;" placeholders="1" id="e_portal_storage">
+                    <mxCell style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;entryX=1;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="c_captive" target="c_storage" edge="1">
+                        <mxGeometry x="-0.2502" y="-10" width="240" relative="1" as="geometry">
+                            <mxPoint x="630" y="630" as="targetPoint"/>
+                            <Array as="points">
+                                <mxPoint x="650" y="270"/>
+                                <mxPoint x="650" y="660"/>
+                            </Array>
+                            <mxPoint as="offset"/>
+                        </mxGeometry>
+                    </mxCell>
+                </object>
+                <object c4Description="Provides AP network" c4Technology="APSTA + DHCP/DNS" c4Type="Relationship" label="&lt;div style=&quot;text-align: center&quot;&gt;&lt;b&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center&quot;&gt;[%c4Technology%]&lt;/div&gt;" placeholders="1" id="e_net_portal">
+                    <mxCell style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=1;exitY=0.25;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="c_net" target="c_captive" edge="1">
+                        <mxGeometry x="0.0588" y="15" width="240" relative="1" as="geometry">
+                            <mxPoint as="offset"/>
+                        </mxGeometry>
+                    </mxCell>
+                </object>
+                <object c4Description="Provides WiFi interface/default route" c4Technology="interface name + routing" c4Type="Relationship" label="&lt;div style=&quot;text-align: center&quot;&gt;&lt;b&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center&quot;&gt;[%c4Technology%]&lt;/div&gt;" placeholders="1" id="e_net_s2">
+                    <mxCell style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;" parent="1" source="c_net" target="c_s2wrap" edge="1">
+                        <mxGeometry x="-0.1111" y="-80" width="240" relative="1" as="geometry">
+                            <mxPoint as="offset"/>
+                        </mxGeometry>
+                    </mxCell>
+                </object>
+                <object c4Description="Provides network &#xa;for clock sync" c4Technology="SNTP" c4Type="Relationship" label="&lt;div style=&quot;text-align: center&quot;&gt;&lt;b&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center&quot;&gt;[%c4Technology%]&lt;/div&gt;" placeholders="1" id="e_time_net">
+                    <mxCell style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;entryX=0;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.75;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="c_net" target="c_time" edge="1">
+                        <mxGeometry x="0.4954" y="5" width="240" relative="1" as="geometry">
+                            <mxPoint as="offset"/>
+                        </mxGeometry>
+                    </mxCell>
+                </object>
+                <object c4Description="Provides HEMS URL, &#xa;pair key, &#xa;access token" c4Technology="NVS" c4Type="Relationship" label="&lt;div style=&quot;text-align: center&quot;&gt;&lt;b&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center&quot;&gt;[%c4Technology%]&lt;/div&gt;" placeholders="1" id="e_storage_s2">
+                    <mxCell style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;entryX=0.25;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.25;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="c_storage" target="c_s2wrap" edge="1">
+                        <mxGeometry width="240" relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object c4Description="Provides appliance &#xa;JSON template" c4Technology="NVS" c4Type="Relationship" label="&lt;div style=&quot;text-align: center&quot;&gt;&lt;b&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center&quot;&gt;[%c4Technology%]&lt;/div&gt;" placeholders="1" id="e_storage_map">
+                    <mxCell style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=0.25;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.25;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="c_modbus" target="c_map" edge="1">
+                        <mxGeometry width="240" relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object c4Description="Pairs and exchanges PEBC messages" c4Technology="S2 HTTP + WebSocket JSON" c4Type="Relationship" label="&lt;div style=&quot;text-align: center&quot;&gt;&lt;b&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center&quot;&gt;[%c4Technology%]&lt;/div&gt;" placeholders="1" id="e_s2_cem">
+                    <mxCell style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;entryX=1;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="c_s2wrap" target="ctx_cem" edge="1">
+                        <mxGeometry width="240" relative="1" as="geometry">
+                            <Array as="points"/>
+                        </mxGeometry>
+                    </mxCell>
+                </object>
+                <object c4Description="Requests sensors/actuators&#xa;Receives results" c4Technology="EMS bridge callbacks" c4Type="Relationship" label="&lt;div style=&quot;text-align: center&quot;&gt;&lt;b&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center&quot;&gt;[%c4Technology%]&lt;/div&gt;" placeholders="1" id="e_s2_ems">
+                    <mxCell style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;" parent="1" source="c_s2wrap" target="c_ems" edge="1">
+                        <mxGeometry x="-0.0588" y="35" width="240" relative="1" as="geometry">
+                            <mxPoint as="offset"/>
+                        </mxGeometry>
+                    </mxCell>
+                </object>
+                <object c4Description="Requests mapped &#xa;Modbus actions" c4Technology="callbacks + result queues" c4Type="Relationship" label="&lt;div style=&quot;text-align: center&quot;&gt;&lt;b&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center&quot;&gt;[%c4Technology%]&lt;/div&gt;" placeholders="1" id="e_ems_map">
+                    <mxCell style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;" parent="1" source="c_ems" target="c_map" edge="1">
+                        <mxGeometry width="240" relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object c4Description="Reads/writes &#xa;configured registers" c4Technology="Modbus component API" c4Type="Relationship" label="&lt;div style=&quot;text-align: center&quot;&gt;&lt;b&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center&quot;&gt;[%c4Technology%]&lt;/div&gt;" placeholders="1" id="e_map_modbus">
+                    <mxCell style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=0.75;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0.75;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;" parent="1" source="c_map" target="c_modbus" edge="1">
+                        <mxGeometry x="-0.2" width="240" relative="1" as="geometry">
+                            <Array as="points">
+                                <mxPoint x="1365" y="530"/>
+                                <mxPoint x="1365" y="530"/>
+                            </Array>
+                            <mxPoint as="offset"/>
+                        </mxGeometry>
+                    </mxCell>
+                </object>
+                <object c4Description="Reads/writes device registers" c4Technology="Modbus TCP/RTU" c4Type="Relationship" label="&lt;div style=&quot;text-align: center&quot;&gt;&lt;b&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center&quot;&gt;[%c4Technology%]&lt;/div&gt;" placeholders="1" id="e_modbus_device">
+                    <mxCell style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;" parent="1" source="c_modbus" target="ctx_device" edge="1">
+                        <mxGeometry width="240" relative="1" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object c4Description="Reports state" c4Technology="LED queue/API" c4Type="Relationship" label="&lt;div style=&quot;text-align: center&quot;&gt;&lt;b&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center&quot;&gt;[%c4Technology%]&lt;/div&gt;" placeholders="1" id="e_led_many">
+                    <mxCell style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;dashed=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;" parent="1" source="c_map" target="c_led" edge="1">
+                        <mxGeometry width="240" relative="1" as="geometry">
+                            <mxPoint x="1190" y="360" as="sourcePoint"/>
+                        </mxGeometry>
+                    </mxCell>
+                </object>
+                <mxCell id="legend_current" value="&lt;b&gt;Current architecture notes&lt;/b&gt;&lt;br&gt;• EMS Bridge is the protocol-neutral bridge.&lt;br&gt;• S2 Wrapper is the only current protocol wrapper.&lt;br&gt;• Captive Portal is separate from Ethernet/WiFi: WiFi brings up APSTA, portal owns DNS/HTTP pages.&lt;br&gt;• Modbus Mapping is request-driven; it does not periodically poll sensors." style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;whiteSpace=wrap;rounded=0;fontSize=12;fontColor=#333333;" parent="1" vertex="1">
+                    <mxGeometry x="40" y="760" width="460" height="140" as="geometry"/>
+                </mxCell>
+                <mxCell id="GZk4Pd1LrufDytXWjTO4-1" value="" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;entryX=0.5;entryY=0;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;exitPerimeter=0;" edge="1" parent="1" source="c_s2wrap" target="c_time">
+                    <mxGeometry width="240" relative="1" as="geometry">
+                        <mxPoint x="610" y="455" as="sourcePoint"/>
+                        <mxPoint x="155" y="405" as="targetPoint"/>
+                        <Array as="points">
+                            <mxPoint x="555" y="560"/>
+                            <mxPoint x="890" y="560"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <object c4Description="Synchronizes system time for TLS and protocol timing." c4Name="Time Module" c4Technology="SNTP" c4Type="Component" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" placeholders="1" id="c_time">
+                    <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#63BEF2;fontColor=#ffffff;align=center;arcSize=6;strokeColor=#2086C9;metaEdit=1;resizable=1;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" parent="1" vertex="1">
+                        <mxGeometry x="810" y="610" width="220" height="100" as="geometry"/>
+                    </mxCell>
+                </object>
+                <mxCell id="GZk4Pd1LrufDytXWjTO4-5" value="" style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="c_time" target="c_modbus">
+                    <mxGeometry width="240" relative="1" as="geometry">
+                        <mxPoint x="1020" y="1020" as="sourcePoint"/>
+                        <mxPoint x="1310" y="510" as="targetPoint"/>
+                    </mxGeometry>
+                </mxCell>
+                <object c4Description="Executes low-level Modbus reads/writes and error handling." c4Name="Modbus Component" c4Technology="Modbus TCP/RTU" c4Type="Component" label="&lt;font style=&quot;font-size: 16px&quot;&gt;&lt;b&gt;%c4Name%&lt;/b&gt;&lt;/font&gt;&lt;div&gt;[%c4Type%: %c4Technology%]&lt;/div&gt;&lt;br&gt;&lt;div&gt;&lt;font style=&quot;font-size: 11px&quot;&gt;%c4Description%&lt;/font&gt;&lt;/div&gt;" placeholders="1" id="c_modbus">
+                    <mxCell style="rounded=1;whiteSpace=wrap;html=1;labelBackgroundColor=none;fillColor=#63BEF2;fontColor=#ffffff;align=center;arcSize=6;strokeColor=#2086C9;metaEdit=1;resizable=1;points=[[0.25,0,0],[0.5,0,0],[0.75,0,0],[1,0.25,0],[1,0.5,0],[1,0.75,0],[0.75,1,0],[0.5,1,0],[0.25,1,0],[0,0.75,0],[0,0.5,0],[0,0.25,0]];" parent="1" vertex="1">
+                        <mxGeometry x="1200" y="610" width="220" height="100" as="geometry"/>
+                    </mxCell>
+                </object>
+                <object c4Description="Reports state" c4Technology="LED queue/API" c4Type="Relationship" label="&lt;div style=&quot;text-align: center&quot;&gt;&lt;b&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center&quot;&gt;[%c4Technology%]&lt;/div&gt;" placeholders="1" id="GZk4Pd1LrufDytXWjTO4-6">
+                    <mxCell style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;dashed=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="c_ems" target="c_led">
+                        <mxGeometry width="240" relative="1" as="geometry">
+                            <mxPoint x="1090" y="390" as="sourcePoint"/>
+                            <mxPoint x="1320" y="330" as="targetPoint"/>
+                            <Array as="points">
+                                <mxPoint x="890" y="363"/>
+                                <mxPoint x="1160" y="363"/>
+                                <mxPoint x="1160" y="295"/>
+                            </Array>
+                        </mxGeometry>
+                    </mxCell>
+                </object>
+                <object c4Description="Reports state" c4Technology="LED queue/API" c4Type="Relationship" label="&lt;div style=&quot;text-align: center&quot;&gt;&lt;b&gt;%c4Description%&lt;/b&gt;&lt;/div&gt;&lt;div style=&quot;text-align: center&quot;&gt;[%c4Technology%]&lt;/div&gt;" placeholders="1" id="GZk4Pd1LrufDytXWjTO4-7">
+                    <mxCell style="endArrow=blockThin;html=1;fontSize=10;fontColor=#404040;strokeWidth=1;endFill=1;strokeColor=#828282;endSize=14;startSize=14;jumpStyle=arc;jumpSize=16;rounded=0;edgeStyle=orthogonalEdgeStyle;dashed=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;exitPerimeter=0;entryX=1;entryY=0.75;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="c_modbus" target="c_led">
+                        <mxGeometry width="240" relative="1" as="geometry">
+                            <mxPoint x="1320" y="415" as="sourcePoint"/>
+                            <mxPoint x="1320" y="330" as="targetPoint"/>
+                            <Array as="points">
+                                <mxPoint x="1460" y="635"/>
+                                <mxPoint x="1460" y="295"/>
+                            </Array>
+                        </mxGeometry>
+                    </mxCell>
+                </object>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

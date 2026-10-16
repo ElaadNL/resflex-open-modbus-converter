@@ -1,0 +1,35 @@
+# SPDX-FileCopyrightText: ElaadNL
+#
+# SPDX-License-Identifier: Apache-2.0
+
+.pio
+.venv
+.vscode/
+.vscode/.browse.c_cpp.db*
+.vscode/c_cpp_properties.json
+.vscode/launch.json
+.vscode/ipch
+.DS_Store
+.idea
+.cache
+*.gcda
+*.gcno
+*.pyc
+*.log
+*.orig
+*_key.pem
+*.pem
+htmlcov/
+__pycache__/
+managed_components/
+compile_commands.json
+dependencies.lock
+coverage.xml
+lcov.info
+AGENTS.md
+.vscode
+.claude
+__pycache__
+node_modules
+package-lock.json
+package.json

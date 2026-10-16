@@ -1,0 +1,210 @@
+{
+  "appliance": {
+    "spec": {
+      "name": {
+        "source": "TEMPLATE_DEFINED",
+        "type": "STRING",
+        "value": "Example home battery"
+      },
+      "model": {
+        "source": "USER_INPUT",
+        "type": "STRING"
+      },
+      "firmwareVersion": {
+        "source": "USER_INPUT",
+        "type": "STRING"
+      },
+      "expectedFirmware": {
+        "type": "REGEX",
+        "value": ".*"
+      }
+    },
+    "connection": {
+      "iface": "ETH",
+      "unitId": {
+        "source": "USER_INPUT",
+        "type": "UINT8",
+        "defaultValue": 1
+      },
+      "eth": {
+        "ipAddress": {
+          "source": "USER_INPUT",
+          "type": "IP_ADDR"
+        },
+        "port": {
+          "source": "TEMPLATE_DEFINED",
+          "type": "UINT16",
+          "value": 502
+        }
+      }
+    },
+    "control": {
+      "roles": ["CONSUMER", "PRODUCER"],
+      "numberOfPhases": {
+        "source": "TEMPLATE_DEFINED",
+        "type": "UINT16",
+        "value": 1
+      },
+      "instructionDelayS": {
+        "source": "TEMPLATE_DEFINED",
+        "type": "UINT16",
+        "value": 1
+      },
+      "consequenceTypeDefer": {
+        "source": "TEMPLATE_DEFINED",
+        "type": "BOOL",
+        "value": true
+      }
+    }
+  },
+  "initialisationSequence": [],
+  "sensors": [
+    {
+      "mappingId": "ACTUAL_POWER_L1",
+      "source": "MODBUS",
+      "functionCode": "FC03",
+      "type": "INT16",
+      "startAddress": 100,
+      "sourceSize": 16,
+      "bigEndian": true,
+      "validityDurationMs": 3000,
+      "multiplier": 1
+    },
+    {
+      "mappingId": "ACTUAL_POWER_TOTAL",
+      "source": "MODBUS",
+      "functionCode": "FC03",
+      "type": "INT16",
+      "startAddress": 100,
+      "sourceSize": 16,
+      "bigEndian": true,
+      "validityDurationMs": 3000,
+      "multiplier": 1
+    },
+    {
+      "mappingId": "ACTUAL_VOLTAGE_L1",
+      "source": "MODBUS",
+      "functionCode": "FC03",
+      "type": "UINT16",
+      "startAddress": 101,
+      "sourceSize": 16,
+      "bigEndian": true,
+      "validityDurationMs": 3000,
+      "multiplier": 0.1
+    },
+    {
+      "mappingId": "POWER_LIMIT_UPPER_START",
+      "source": "TEMPLATE_DEFINED",
+      "type": "INT16",
+      "value": 0,
+      "validityDurationMs": 3000
+    },
+    {
+      "mappingId": "POWER_LIMIT_UPPER_END",
+      "source": "TEMPLATE_DEFINED",
+      "type": "INT16",
+      "value": 2000,
+      "validityDurationMs": 3000
+    },
+    {
+      "mappingId": "POWER_LIMIT_LOWER_START",
+      "source": "TEMPLATE_DEFINED",
+      "type": "INT16",
+      "value": -2000,
+      "validityDurationMs": 3000
+    },
+    {
+      "mappingId": "POWER_LIMIT_LOWER_END",
+      "source": "TEMPLATE_DEFINED",
+      "type": "INT16",
+      "value": 0,
+      "validityDurationMs": 3000
+    },
+    {
+      "mappingId": "ENERGY_LIMIT_UPPER_START",
+      "source": "TEMPLATE_DEFINED",
+      "type": "INT16",
+      "value": 0,
+      "validityDurationMs": 3000
+    },
+    {
+      "mappingId": "ENERGY_LIMIT_UPPER_END",
+      "source": "TEMPLATE_DEFINED",
+      "type": "INT16",
+      "value": 5000,
+      "validityDurationMs": 3000
+    },
+    {
+      "mappingId": "ENERGY_LIMIT_LOWER_START",
+      "source": "TEMPLATE_DEFINED",
+      "type": "INT16",
+      "value": -5000,
+      "validityDurationMs": 3000
+    },
+    {
+      "mappingId": "ENERGY_LIMIT_LOWER_END",
+      "source": "TEMPLATE_DEFINED",
+      "type": "INT16",
+      "value": 0,
+      "validityDurationMs": 3000
+    },
+    {
+      "mappingId": "STATUS",
+      "source": "MODBUS",
+      "functionCode": "FC03",
+      "type": "UINT16",
+      "startAddress": 102,
+      "sourceSize": 16,
+      "bigEndian": true,
+      "validityDurationMs": 5000,
+      "outputMapping": [
+        {
+          "value": 0,
+          "label": "ENUM_STATUS_STATUS_OK"
+        },
+        {
+          "value": 1,
+          "label": "ENUM_STATUS_STATUS_ERR"
+        }
+      ]
+    }
+  ],
+  "actuators": [
+    {
+      "mappingId": "SETPOINT_MAX_POWER_L1",
+      "functionCode": "FC06",
+      "evaluationIntervalS": 1,
+      "requiredSensorsBeforeEvaluation": [
+        "STATUS"
+      ],
+      "type": "UINT16",
+      "bigEndian": true,
+      "multiplier": 1,
+      "startAddress": 200,
+      "destinationSize": 16,
+      "maxStepsizeUp": 2000,
+      "maxStepsizeDown": 2000,
+      "minStepTimeMs": 1000,
+      "requiredPreSequence": [],
+      "requiredPostSequence": []
+    },
+    {
+      "mappingId": "SETPOINT_MIN_POWER_L1",
+      "functionCode": "FC06",
+      "evaluationIntervalS": 1,
+      "requiredSensorsBeforeEvaluation": [
+        "STATUS"
+      ],
+      "type": "UINT16",
+      "bigEndian": true,
+      "multiplier": -1,
+      "startAddress": 201,
+      "destinationSize": 16,
+      "maxStepsizeUp": 2000,
+      "maxStepsizeDown": 2000,
+      "minStepTimeMs": 1000,
+      "requiredPreSequence": [],
+      "requiredPostSequence": []
+    }
+  ]
+}

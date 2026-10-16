@@ -1,0 +1,76 @@
+# SPDX-FileCopyrightText: ElaadNL
+#
+# SPDX-License-Identifier: Apache-2.0
+
+name: Tests and SonarQube Analysis
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    name: Test and Coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      # Do not use espressif/esp-idf-ci-action here (see build.yml): PlatformIO manages
+      # the ESP-IDF 5.5.3 toolchain itself via platform = espressif32@6.13.0. The native
+      # test envs compile on the ubuntu-latest host gcc/g++, which is already present.
+      - name: Install PlatformIO and gcovr
+        run: pip install platformio gcovr --quiet
+
+      - name: Run native tests and coverage
+        run: |
+          pio test -e native
+          pio test -e native_s2
+          pio test -e native_captive
+          gcovr --root . --filter 'lib/modbus_mapping_component/.*' --filter 'lib/ems_bridge_component/.*' --sonarqube coverage.xml --txt
+          pio run --target compiledb --environment esp-wrover-kit
+
+      - name: Upload coverage artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: coverage-report
+          path: |
+            ./coverage.xml
+            ./compile_commands.json
+          retention-days: 3
+
+  sonarqube:
+    name: SonarQube Analysis
+    needs: test
+    runs-on: ubuntu-latest
+    if: |
+      vars.SONAR_ENABLED == 'true' &&
+      (github.event_name == 'pull_request' || (github.event_name == 'push' && github.ref == 'refs/heads/main'))
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+
+      - name: Download coverage artifacts
+        uses: actions/download-artifact@v8
+        with:
+          name: coverage-report
+          path: .
+
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v7.0.0
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_USER_HOME: ${{ github.workspace }}/.sonar
+          SONAR_QUALITYGATE_WAIT: "true"
+        with:
+          args: >
+            -Dsonar.projectKey=${{ secrets.SONAR_PROJECT }}
+            -Dsonar.coverageReportPaths=coverage.xml

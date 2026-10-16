@@ -1,0 +1,49 @@
+# SPDX-FileCopyrightText: ElaadNL
+#
+# SPDX-License-Identifier: Apache-2.0
+
+CONFIG_AUTOSTART_ARDUINO=y
+CONFIG_FREERTOS_HZ=1000
+CONFIG_MBEDTLS_PSK_MODES=y
+CONFIG_MBEDTLS_KEY_EXCHANGE_PSK=y
+CONFIG_MB_COMM_MODE_TCP_EN=y
+CONFIG_MB_MASTER_TCP_EN=y
+CONFIG_FMB_COMM_MODE_TCP_EN=y
+CONFIG_ESPTOOLPY_FLASHSIZE_16MB=y
+CONFIG_ESPTOOLPY_FLASHSIZE="16MB"
+CONFIG_ESP_MAIN_TASK_STACK_SIZE=8192
+
+# mbedtls heap diet for HEMS TLS pairing (S2). Heap-monitor showed
+# ssl_setup hitting ALLOC_FAILED at ~16KB free; baseline was ~60KB and
+# ~38KB stayed unreclaimed after a failed pairing. Shrinks per-session
+# footprint and releases handshake buffers post-handshake.
+CONFIG_MBEDTLS_SSL_IN_CONTENT_LEN=4096
+CONFIG_MBEDTLS_DYNAMIC_BUFFER=y
+CONFIG_MBEDTLS_DYNAMIC_FREE_PEER_CERT=y
+CONFIG_MBEDTLS_DYNAMIC_FREE_CONFIG_DATA=y
+
+# PSRAM enable. The esp-wrover-kit has 4MB external SPIRAM on board
+# but it was disabled. Heap-monitor showed free=1.5KB / largest_block=576
+# after three TLS pairing calls + a WSS attempt — internal DRAM is too
+# tight for this TLS workload. Route mbedtls allocations to PSRAM and
+# let WiFi/lwIP prefer PSRAM too. ALWAYSINTERNAL/RESERVE_INTERNAL keep
+# DMA-safe and small allocations on internal RAM.
+CONFIG_SPIRAM=y
+CONFIG_SPIRAM_BOOT_INIT=y
+CONFIG_SPIRAM_USE_MALLOC=y
+CONFIG_SPIRAM_TYPE_AUTO=y
+CONFIG_SPIRAM_SPEED_40M=y
+CONFIG_SPIRAM_MALLOC_ALWAYSINTERNAL=16384
+CONFIG_SPIRAM_MALLOC_RESERVE_INTERNAL=32768
+CONFIG_SPIRAM_TRY_ALLOCATE_WIFI_LWIP=y
+CONFIG_MBEDTLS_EXTERNAL_MEM_ALLOC=y
+# DYNAMIC_BUFFER and EXTERNAL_MEM_ALLOC are mutually exclusive in some
+# idf versions because dynamic-buffer uses internal-only paths. If the
+# build complains, drop the DYNAMIC_BUFFER line above — PSRAM gives
+# you the headroom that DYNAMIC_BUFFER was patching around.
+
+# IRAM reclaim. PSRAM enable pulls in the ESP32 cache-bug workaround
+# which costs IRAM; the WiFi IRAM optimisations had to go to make
+# linkage fit (504-byte overflow). Tiny throughput cost for S2 traffic.
+CONFIG_ESP_WIFI_IRAM_OPT=n
+CONFIG_ESP_WIFI_RX_IRAM_OPT=n

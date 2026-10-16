@@ -1,0 +1,41 @@
+# SPDX-FileCopyrightText: ElaadNL
+#
+# SPDX-License-Identifier: Apache-2.0
+
+name: ESP-IDF Build
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build ESP-IDF Project
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      # Do not use espressif/esp-idf-ci-action here: it runs inside the espressif/idf
+      # image, which ships its own ESP-IDF that collides with the PlatformIO-managed
+      # one (duplicate build targets, e.g. esp_efuse_fields.c). PlatformIO installs
+      # and manages the full ESP-IDF 5.5.3 toolchain itself via platform =
+      # espressif32@6.13.0 (see platformio.ini). ubuntu-latest already has python.
+      - name: Install PlatformIO
+        run: pip install platformio --quiet
+
+      - name: Build firmware
+        run: pio run -e esp-wrover-kit
+
+      - name: Upload firmware artifacts
+        uses: actions/upload-artifact@v6
+        with:
+          name: firmware
+          path: |
+            .pio/build/esp-wrover-kit/firmware.bin
+            .pio/build/esp-wrover-kit/firmware.elf
+          retention-days: 7

@@ -1,0 +1,10 @@
+# SPDX-FileCopyrightText: ElaadNL
+#
+# SPDX-License-Identifier: Apache-2.0
+
+dependencies:
+  espressif/led_strip: "^3.0.0"
+  # Required by the s2-device-firmware library (see its idf_component.yml). It lives
+  # under .pio/libdeps/, whose manifest the component manager does not scan, so the
+  # dependency is declared here on the main component instead. Version tracks the lib.
+  espressif/esp_websocket_client: "^1.6.1"

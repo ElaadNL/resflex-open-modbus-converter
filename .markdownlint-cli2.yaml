@@ -1,0 +1,14 @@
+# SPDX-FileCopyrightText: ElaadNL
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# markdownlint-cli2 wrapper config: reuse the shared rules from
+# .markdownlint.yaml and exclude third-party / generated Markdown so only
+# our own documentation is linted.
+
+config: ".markdownlint.yaml"
+
+ignores:
+  - ".pio/**"
+  - "node_modules/**"
+  - "managed_components/**"

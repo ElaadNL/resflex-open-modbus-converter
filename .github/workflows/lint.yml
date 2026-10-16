@@ -1,0 +1,47 @@
+# SPDX-FileCopyrightText: ElaadNL
+#
+# SPDX-License-Identifier: Apache-2.0
+
+name: Linting check
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  lint:
+    name: Lint with PlatformIO check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v6
+
+      # Do not use espressif/esp-idf-ci-action here (see build.yml): PlatformIO manages
+      # the ESP-IDF 5.5.3 toolchain itself via platform = espressif32@6.13.0.
+      - name: Install PlatformIO
+        run: pip install platformio --quiet
+
+      # LINT — static analysis via PlatformIO's check (cppcheck/clang-tidy).
+      # Fails the pipeline on real errors; warnings do not block.
+      #
+      # Cppcheck flags:
+      #   --suppress=*:*/ArduinoJson/*
+      #     ArduinoJson uses heavy macro magic (ARDUINOJSON_CONCAT_, namespace macros)
+      #     that cppcheck's preprocessor cannot expand, producing a false-positive
+      #     "preprocessorErrorDirective". Third-party lib, not our code.
+      #   --suppress=*:*/framework-espidf/*
+      #     Suppress all findings in the ESP-IDF framework headers.
+      #     These are upstream code shipped by Espressif; not our concern.
+      #   --suppress=syntaxError
+      #     ESP-IDF logging macros (ESP_LOGE/ESP_LOGI/etc.) use variadic macros and
+      #     __attribute__ extensions that cppcheck cannot parse standalone (without
+      #     full compile_commands.json context). This produces false-positive
+      #     "syntax error" reports on every file that calls ESP_LOG*. Real syntax
+      #     errors are still caught at compile time by the build workflow.
+      - name: Run PlatformIO check
+        run: |
+          pio check -e esp-wrover-kit --fail-on-defect high --fail-on-defect medium --skip-packages --src-filters="+<src/> +<lib/> -<.pio/>" --flags "cppcheck: --suppress=*:*/ArduinoJson/* --suppress=*:*/framework-espidf/* --suppress=syntaxError"

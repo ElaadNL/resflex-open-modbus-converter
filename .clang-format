@@ -1,0 +1,23 @@
+# SPDX-FileCopyrightText: ElaadNL
+#
+# SPDX-License-Identifier: Apache-2.0
+
+BasedOnStyle: LLVM
+BreakBeforeBraces: Custom
+BraceWrapping:
+  AfterControlStatement: false   # if(...) {
+  AfterFunction: false           # int f(){ ... }
+  BeforeElse: true               # } \n else {
+  BeforeCatch: true
+AllowShortIfStatementsOnASingleLine: false
+IndentWidth: 4
+IndentCaseLabels: true   # case verder inspringen dan switch
+KeepEmptyLinesAtTheStartOfBlocks: true
+MaxEmptyLinesToKeep: 999
+SortIncludes: false
+AllowShortFunctionsOnASingleLine: None
+SpaceBeforeParens: ControlStatements   # space after if/while/for/switch, not after function calls
+ColumnLimit: 0
+ReflowComments: false
+NamespaceIndentation: All # This enforces indentation for all namespaces
+AlignArrayOfStructures: Right

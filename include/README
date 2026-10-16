@@ -1,0 +1,18 @@
+<!--
+SPDX-FileCopyrightText: ElaadNL
+
+SPDX-License-Identifier: Apache-2.0
+-->
+
+# include
+
+This directory is reserved for project-wide public headers.
+
+It is currently intentionally empty. The converter code is organized as
+PlatformIO private libraries under `lib/`, and each component keeps its own
+headers next to its implementation. That makes ownership clearer and keeps
+component dependencies explicit.
+
+Use this directory only for headers that are genuinely shared by the whole
+application and do not belong to a specific component. Most new declarations
+should go into the relevant component directory under `lib/`.

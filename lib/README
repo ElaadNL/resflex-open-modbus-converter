@@ -1,0 +1,47 @@
+<!--
+SPDX-FileCopyrightText: ElaadNL
+
+SPDX-License-Identifier: Apache-2.0
+-->
+
+# lib
+
+This directory contains the converter's PlatformIO private libraries. Each
+subdirectory owns one firmware component and is compiled into the application by
+PlatformIO's Library Dependency Finder.
+
+## Components
+
+- `captive_portal_component`: Provides the first-boot/configuration web portal,
+  DNS redirects, HTTP routes, form parsing, and NVS updates for device setup.
+- `ems_bridge`: Defines the protocol-neutral bridge API between EMS/S2 concepts
+  and the converter's internal sensor and actuator requests.
+- `eth_wifi_component`: Initializes Ethernet and WiFi AP/STA networking,
+  including captive-portal AP setup and route preference.
+- `led_component`: Owns the device LED state model and maps firmware states to
+  visible LED behavior.
+- `modbus_component`: Handles low-level Modbus TCP/RTU communication with the
+  configured appliance.
+- `modbus_mapping_component`: Parses device templates and translates EMS/S2
+  sensor and actuator requests into Modbus reads, writes, and sequences.
+- `s2_library_wrapper`: Wraps the shared `s2-device-firmware` library so the
+  converter can expose its appliance model and receive S2 callbacks.
+- `shared_types`: Contains shared data structures, constants, queue messages,
+  and appliance configuration types used across components.
+- `storage_component`: Initializes and accesses persistent storage, including
+  NVS configuration values and SPIFFS template storage.
+- `time_module`: Provides time-related firmware helpers used by the converter.
+
+## Development notes
+
+Keep component-specific headers and implementation files inside the component
+that owns the behavior. Shared structures belong in `shared_types`; generic
+project-wide headers should only go in `include/` when they do not naturally fit
+any component.
+
+The intended dependency direction is:
+
+- S2 protocol integration goes through `s2_library_wrapper`.
+- Protocol-neutral EMS concepts go through `ems_bridge`.
+- S2-to-Modbus decisions belong in `modbus_mapping_component`.
+- Raw Modbus transport details belong in `modbus_component`.
